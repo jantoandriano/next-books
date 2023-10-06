@@ -1,24 +1,20 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import Providers from './_utils/provider'
+import './globals.css';
+import type { Metadata } from 'next';
+import Providers from './_utils/provider';
+import Navbar from './_components/navbar';
 
 export const metadata: Metadata = {
   title: 'Books App',
-  description: '',
-}
+  description: ''
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <Navbar />
+        <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -1,38 +1,55 @@
-import Link from "next/link";
-import { FunctionComponent } from "react";
+import Link from 'next/link';
+import { FunctionComponent } from 'react';
+import WishlistButton from '../wishlistbutton';
 
 type Props = {
-    id: string
-    title: string
-    description: string
-    image: string
-    publishedDate: string
-    authors?: string []
-}
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  publishedDate: string;
+  authors?: string[];
+};
 
-export const Card: FunctionComponent<Props> = ({id, title, description, image, publishedDate, authors}) => {
-    return (
-        <Link href={`/book/${id}`}>
-        <div className="card w-96 h-96 bg-base-100 shadow-xl">
-            <img src={image} alt={title} className="rounded-xl p-2 bg-cover h-2/6"/>
-            <div className="card-body">
-                <h2 className="card-title truncate">
-                    {title}
-                </h2>
-                <div className="flex flex-row gap-2">
-                    {authors?.map(val => (
-                        <div className="p-1 rounded-md bg-blue-100 truncate">{val}</div>
-                    ))}
-                    <div className="p-1 rounded-md bg-yellow-100">{publishedDate}</div>
+export const Card: FunctionComponent<Props> = ({
+  id,
+  title,
+  description,
+  image,
+  publishedDate,
+  authors
+}) => {
+  return (
+    <div>
+      <Link href={`/book/${id}`}>
+        <div className="flex flex-col items-center self-start border border-gray-900 rounded-lg bg-gray-800 ">
+          <div className="relative">
+            <img className="w-40 h-56 p-4 rounded-t-lg lg:w-56 lg:h-80" src={image} alt={title} />
+          </div>
+          <div className="flex flex-col flex-wrap content-between justify-center px-5 pb-5 align-middle">
+            <h5
+              title={title}
+              className="w-32 h-12 text-base font-semibold tracking-tight text-gray-100 lg:w-48 lg:text-lg lg:h-14 line-clamp-2"
+            >
+              {title}
+            </h5>
+            <div className="flex flex-col space-y-2">
+              <div>
+                <div className="text-xs sm:text-sm w-20 before:mr-1 truncate text-white">
+                  {description}
                 </div>
-                <div className="h-2/5 truncate">
-                    {description}
-                </div>
-
-                <button className="btn btn-primary">Simpan</button>
+                <span className="text-xs right-0 font-semibold rounded text-white">
+                  {publishedDate}
+                </span>
+              </div>
             </div>
+          </div>
         </div>
-        </Link>
+      </Link>
 
-    )
-}
+      <div className="mt-2">
+        <WishlistButton />
+      </div>
+    </div>
+  );
+};

@@ -17,6 +17,14 @@ const Filters = () => {
     setStartDate(date);
   };
 
+  const onSortName = (sortDir: string) => {
+    onChangeQuery('sort', `title:${sortDir}`);
+  }
+
+  const onSortYear = (sortDir: string) => {
+    onChangeQuery('sort', `publishedDate:${sortDir}`);
+  }
+
   return (
     <div className="flex justify-between pt-5">
       <div className='flex input bg-cyan-900 text-white justify-center items-center'>
@@ -32,8 +40,8 @@ const Filters = () => {
         <FaCalendar />
       </div>
       <div className='flex gap-2'>
-        <Sort title="Title" onClick={() => console.log('sort')} disabled={false} />
-        <Sort title="Year" onClick={() => console.log('sort')} disabled={false} />
+        <Sort title="Title" onClick={onSortName} />
+        <Sort title="Year" onClick={onSortYear} />
       </div>
     </div>
   );

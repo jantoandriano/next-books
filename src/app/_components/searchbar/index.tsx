@@ -14,6 +14,7 @@ export const SearchBar = () => {
   const onSubmit = (event: any) => {
     event.preventDefault();
     onChangeQuery('q', search);
+    setSearch('')
   };
 
   return (
@@ -23,7 +24,7 @@ export const SearchBar = () => {
         onChange={onSearch}
         type="text"
         placeholder="Search books"
-        className="input input-bordered w-full max-w-xs"
+        className="input input-bordered w-full max-w-xs text-cyan-900"
       />
     </form>
   );

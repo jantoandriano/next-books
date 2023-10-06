@@ -1,6 +1,7 @@
 export const mappingResponse = (res: { data: { items: any[] } }, sort?: string) => {
   let sortDir = ""
   let sortBy = ''
+
   if (sort) {
     const [a, b] = sort.split(":");
     sortBy = a;
@@ -16,9 +17,9 @@ export const mappingResponse = (res: { data: { items: any[] } }, sort?: string) 
       publishedDate: val.volumeInfo.publishedDate,
       image: val.volumeInfo.imageLinks?.thumbnail || ''
     })).sort(compareValues(sortBy, sortDir))
-  } else {
-    return [];
   }
+
+  return []
 };
 
 export const mappingResponseByYear = (res: { data: { items: any[] } }, year: string, sort: string) => {
@@ -41,7 +42,6 @@ export const mappingResponseByYear = (res: { data: { items: any[] } }, year: str
   }
   return temp
 };
-
 
 const compareValues = (key: string, order = 'asc') => {
   return function innerSort(a: any, b: any) {

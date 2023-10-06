@@ -11,13 +11,11 @@ async function getBooks(query: string, index: number | string = 1, year: string,
   const res = await axios.get(
     `https://www.googleapis.com/books/v1/volumes?q=${query}:keyes&maxResults=10&startIndex=${index}&key=AIzaSyBQ_6EXMyfegzv4XJ4VCvc5CgZT1zuXwLQ`
   );
-  let temp = [];
+
   if (year) {
-    temp = mappingResponseByYear(res, year, sort);
-    return temp;
+    return mappingResponseByYear(res, year, sort);
   }
-  temp = mappingResponse(res, sort);
-  return temp;
+  return mappingResponse(res, sort);
 }
 
 export default async function Page({
@@ -29,8 +27,6 @@ export default async function Page({
   const pageIndex = searchParams.pageIndex;
   const year = searchParams.year;
   const sort = searchParams.sort;
-
-
 
   const booksResponse = getBooks(query ? query : 'flowers', pageIndex, year, sort);
 

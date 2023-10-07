@@ -8,17 +8,16 @@ type Props = {
   description: string;
   image: string;
   publishedDate: string;
-  authors?: string[];
 };
 
-export const Card: FunctionComponent<Props> = ({
-  id,
-  title,
-  description,
-  image,
-  publishedDate,
-  authors
-}) => {
+export const Card: FunctionComponent<Props> = (props) => {
+  const {
+    id,
+    title,
+    description,
+    image,
+    publishedDate,
+  } = props
   return (
     <div>
       <Link href={`/book/${id}`}>
@@ -48,7 +47,7 @@ export const Card: FunctionComponent<Props> = ({
       </Link>
 
       <div className="mt-2">
-        <WishlistButton />
+        <WishlistButton data={props} />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Loading from './loading';
 import Filters from './_components/filters';
 import { mappingResponse, mappingResponseByYear } from './_helper';
+import { Toaster } from 'react-hot-toast';
 
 async function getBooks(query: string, index: number | string = 1, year: string, sort: string) {
 
@@ -41,6 +42,7 @@ export default async function Page({
         <Books data={booksData} />
       </Suspense>
       <Pagination />
+      <Toaster />
     </div>
   );
 }

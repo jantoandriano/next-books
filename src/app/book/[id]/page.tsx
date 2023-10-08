@@ -1,32 +1,25 @@
-'use client';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+async function getBook(id: string) {
+  const res = await fetch(
+    `https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyBQ_6EXMyfegzv4XJ4VCvc5CgZT1zuXwLQ`,
+    {
+      cache: 'force-cache'
+    }
+  );
 
-const Page = () => {
-  const params = useParams();
 
-  const {
-    isLoading,
-    error,
-    data: product
-  } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch(
-        `https://www.googleapis.com/books/v1/volumes/${params.id}?key=AIzaSyBQ_6EXMyfegzv4XJ4VCvc5CgZT1zuXwLQ`
-      ).then((res) => res.json())
-  });
+  if (res.status > 500) {
+    throw new Error('Failed to fetch data')
+  }
+  const response = await res.json()
+  return response
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center pt-56">
-        <span className="loading loading-dots loading-lg"></span>
-      </div>
-    );
+}
 
-  if (error) return 'An error has occurred';
+const Page = async ({ searchParams }: {
+  searchParams: { id: string }
+}) => {
+  const product = await getBook(searchParams.id);
 
-  console.log(product);
 
   return (
     <section className="overflow-hidden text-gray-100">

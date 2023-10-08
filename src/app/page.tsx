@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Books } from './_components/books/books';
 import { Pagination } from './_components/pagination';
 import { Suspense } from 'react';
@@ -6,17 +5,25 @@ import Loading from './loading';
 import Filters from './_components/filters';
 import { mappingResponse, mappingResponseByYear } from './_helper';
 import { Toaster } from 'react-hot-toast';
+import RecommendedBooks from './recommended-books';
 
 async function getBooks(query: string, index: number | string = 1, year: string, sort: string) {
 
-  const res = await axios.get(
-    `https://www.googleapis.com/books/v1/volumes?q=${query}:keyes&maxResults=10&startIndex=${index}&key=AIzaSyBQ_6EXMyfegzv4XJ4VCvc5CgZT1zuXwLQ`
+  const res = await fetch(
+    `https://www.googleapis.com/books/v1/volumes?q=${query}:keyes&maxResults=10&startIndex=${index}&key=AIzaSyBQ_6EXMyfegzv4XJ4VCvc5CgZT1zuXwLQ`, {
+    cache: 'force-cache'
+  }
   );
+  const response = await res.json()
+
+  if (response.error) {
+    throw new Error('Failed to fetch data')
+  }
 
   if (year) {
-    return mappingResponseByYear(res, year, sort);
+    return mappingResponseByYear(response, year, sort);
   }
-  return mappingResponse(res, sort);
+  return mappingResponse(response, sort);
 }
 
 export default async function Page({
@@ -29,15 +36,12 @@ export default async function Page({
   const year = searchParams.year;
   const sort = searchParams.sort;
 
-  const booksResponse = getBooks(query ? query : 'flowers', pageIndex, year, sort);
-
-  const [booksData] = await Promise.all([booksResponse]);
+  const booksData = await getBooks(query ? query : 'flowers', pageIndex, year, sort);
 
   return (
     <div className="mt-20">
-      <div className='mx-10'>
-        <Filters />
-      </div>
+      <Filters />
+      <RecommendedBooks />
       <Suspense fallback={<Loading />}>
         <Books data={booksData} />
       </Suspense>

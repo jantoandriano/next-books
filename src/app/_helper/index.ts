@@ -1,4 +1,4 @@
-export const mappingResponse = (res: { data: { items: any[] } }, sort?: string) => {
+export const mappingResponse = (res: { items: any[] }, sort?: string) => {
   let sortDir = ""
   let sortBy = ''
 
@@ -9,7 +9,7 @@ export const mappingResponse = (res: { data: { items: any[] } }, sort?: string) 
   }
 
   if (res) {
-    return res.data.items.map((val: any) => ({
+    return res.items.map((val: any) => ({
       id: val.id,
       title: val.volumeInfo.title,
       authors: val.volumeInfo.authors,
@@ -22,7 +22,7 @@ export const mappingResponse = (res: { data: { items: any[] } }, sort?: string) 
   return []
 };
 
-export const mappingResponseByYear = (res: { data: { items: any[] } }, year: string, sort: string) => {
+export const mappingResponseByYear = (res: { items: any[] }, year: string, sort: string) => {
   const temp = mappingResponse(res);
   let sortDir = ""
   let sortBy = ""

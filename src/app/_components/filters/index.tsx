@@ -26,7 +26,7 @@ const Filters = () => {
   }
 
   return (
-    <div className="flex justify-between pt-5">
+    <div className="flex justify-between pt-5 mx-10">
       <div className='flex input bg-cyan-900 text-white justify-center items-center'>
         <DatePicker
           selected={startDate}

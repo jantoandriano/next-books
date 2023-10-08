@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useWishlistContext } from "../_context/WishListContext";
+import { useWishlistContext } from "../../_context/WishListContext";
 
 
 const RecommendedBooks = () => {

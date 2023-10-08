@@ -5,7 +5,7 @@ import Loading from './loading';
 import Filters from './_components/filters';
 import { mappingResponse, mappingResponseByYear } from './_helper';
 import { Toaster } from 'react-hot-toast';
-import RecommendedBooks from './recommended-books';
+import RecommendedBooks from './_components/recommended-books';
 
 async function getBooks(query: string, index: number | string = 1, year: string, sort: string) {
 

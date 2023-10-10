@@ -24,7 +24,7 @@ export const SearchBar = () => {
         onChange={onSearch}
         type="text"
         placeholder="Search books"
-        className="input input-bordered w-full max-w-xs text-cyan-900"
+        className="input input-bordered w-full max-w-xs text-white"
       />
     </form>
   );

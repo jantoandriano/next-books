@@ -7,8 +7,9 @@ import { useWishlistContext } from "../../_context/WishListContext";
 
 const RecommendedBooks = () => {
     const ctx = useWishlistContext()
-    const title = ctx?.wishlistState[0]?.title || 'flowers'
-    const author = ctx?.wishlistState[0]?.authors ? ctx?.wishlistState[0]?.authors[0] : 'keyes'
+    
+    const title = ctx.wishlistState && ctx?.wishlistState[0]?.title || 'flowers'
+    const author = ctx.wishlistState && ctx?.wishlistState[0]?.authors ? ctx?.wishlistState[0]?.authors[0] : 'keyes'
 
 
     const { isLoading, error, data } = useQuery(['recommended-book'], async () => {
@@ -16,7 +17,6 @@ const RecommendedBooks = () => {
         return res.data.items
 
     })
-
 
     if (isLoading) return (
         <div className="flex justify-center items-center">
